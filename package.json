@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^14.1.2",
     "@types/node": "^14.14.13",
     "@types/react": "^17.0.0",
     "@zeit/next-sass": "^1.0.1",

@@ -10,7 +10,9 @@ const client = createClient({
 
 function HomePage() {
   async function fetchEntries() {
-    const entries = await client.getEntries();    
+    const entries = await client.getEntries({
+      content_type: 'trip',
+    });
     if (entries.items) return entries.items;
   }
 
@@ -35,9 +37,9 @@ function HomePage() {
             <Post
               alt={p.fields.alt}
               date={p.fields.date}
-              key={p.fields.titel}
+              key={`${p.fields.titel}${p.fields.title}`}
               image={p.fields.image}
-              title={p.fields.titel}
+              title={p.fields.titel ? p.fields.titel : p.fields.title}
               url={p.fields.url}
               body={p.fields.body}
             />
