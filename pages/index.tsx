@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import Post from '../components/Post';
 import { createClient } from 'contentful';
 
@@ -28,10 +27,6 @@ function HomePage() {
 
   return (
     <>
-      <Head>
-        <title>Friendly Travel</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       {posts.length > 0
         ? posts.map(p => (
             <Post
