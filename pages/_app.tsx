@@ -1,6 +1,6 @@
-import '../styles/globals.scss';
 import Link from 'next/link';
 import Head from 'next/head';
+import '../styles/globals.scss';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Friendly Travel</title>
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Yeseva+One&display=swap" rel="stylesheet"></link>
       </Head>
 
       <header>
