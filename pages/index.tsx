@@ -1,16 +1,50 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Post from '../components/Post';
+import { createClient } from 'contentful';
 
-export default function Home() {
+const client = createClient({
+  space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
+  accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
+});
+
+function HomePage() {
+  async function fetchEntries() {
+    const entries = await client.getEntries();    
+    if (entries.items) return entries.items;
+  }
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function getPosts() {
+      const allPosts = await fetchEntries();
+      setPosts([...allPosts]);
+    }
+    getPosts();
+  }, []);
+
   return (
-    <div>
+    <>
       <Head>
         <title>Friendly Travel</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main></main>
-
-      <footer></footer>
-    </div>
+      {posts.length > 0
+        ? posts.map(p => (
+            <Post
+              alt={p.fields.alt}
+              date={p.fields.date}
+              key={p.fields.titel}
+              image={p.fields.image}
+              title={p.fields.titel}
+              url={p.fields.url}
+              body={p.fields.body}
+            />
+          ))
+        : null}
+    </>
   );
 }
+
+export default HomePage;
