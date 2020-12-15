@@ -1,0 +1,24 @@
+@import '../styles/variables.scss';
+
+.header {
+  background-color: $pink;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: $max-width;
+  margin: auto;
+  padding: 0 2rem;
+
+  .homeLink {
+    @include center-row;
+    justify-content: flex-start;
+
+    img {
+      max-height: 2rem;
+      margin: 0 0 0 0.3rem;
+    }
+  }
+}

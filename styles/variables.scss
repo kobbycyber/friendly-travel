@@ -5,4 +5,19 @@ $blue: #2f9bc9;
 $white: #fafafa;
 $light-grey: #cccccc;
 $dark-grey: #999999;
-$black: #404040;
+$black: #2e2e2e;
+
+$max-width: 900px;
+
+@mixin center-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
