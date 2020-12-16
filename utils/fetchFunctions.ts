@@ -14,3 +14,14 @@ export const fetchAllTrips = async () => {
     return entries.items;
   }
 };
+
+export const fetchSortedTrips = async (orderBy: string) => {
+  const entries = await client.getEntries({
+    content_type: 'trip',
+    order: orderBy,
+  });
+
+  if (entries.items) {
+    return entries.items;
+  }
+};

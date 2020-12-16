@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchAllTrips } from '../../utils/fetchFunctions';
+import { fetchAllTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
 import TripCard from '../../components/TripCard';
 import styles from './index.module.scss';
 
@@ -15,8 +15,32 @@ const Trips = () => {
     getTrips();
   }, []);
 
+  const handleSort = async (value: string) => {
+    const sortingValue =
+      value === 'date'
+        ? 'fields.startDate'
+        : value === 'lowestPrice'
+        ? 'fields.price'
+        : value === 'highestPrice'
+        ? '-fields.price'
+        : '-sys.createdAt';
+
+    const sortedTrips = await fetchSortedTrips(sortingValue);
+    setTrips([...sortedTrips]);
+  };
+
   return (
     <>
+      <article className={styles.sortingWrapper}>
+        <label htmlFor="sort">Sort by</label>
+        <select name="sort" id="sort" onChange={e => handleSort(e.target.value)}>
+          <option value="new">Newest</option>
+          <option value="date">Date</option>
+          <option value="lowestPrice">Lowest Price</option>
+          <option value="highestPrice">Highest Price</option>
+        </select>
+      </article>
+
       <div className={styles.tripCardWrapper}>
         {trips.length
           ? trips.map(p => (
