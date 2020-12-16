@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { fetchAllTrips } from '../../utils/fetchFunctions';
-import Post from '../../components/Post';
+import { fetchAllTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
+import TripCard from '../../components/TripCard';
+import styles from './index.module.scss';
 
 const Trips = () => {
   const [trips, setTrips] = useState([]);
@@ -14,20 +15,42 @@ const Trips = () => {
     getTrips();
   }, []);
 
+  const handleSort = async (value: string) => {
+    const sortingValue =
+      value === 'date'
+        ? 'fields.startDate'
+        : value === 'lowestPrice'
+        ? 'fields.price'
+        : value === 'highestPrice'
+        ? '-fields.price'
+        : '-sys.createdAt';
+
+    const sortedTrips = await fetchSortedTrips(sortingValue);
+    setTrips([...sortedTrips]);
+  };
+
   return (
     <>
-      <h1>all trips</h1>
-      <div>
+      <article className={styles.sortingWrapper}>
+        <label htmlFor="sort">Sort by</label>
+        <select name="sort" id="sort" onChange={e => handleSort(e.target.value)}>
+          <option value="new">Newest</option>
+          <option value="date">Date</option>
+          <option value="lowestPrice">Lowest Price</option>
+          <option value="highestPrice">Highest Price</option>
+        </select>
+      </article>
+
+      <div className={styles.tripCardWrapper}>
         {trips.length
           ? trips.map(p => (
-              <Post
-                alt={p.fields.alt}
-                date={p.fields.date}
-                key={`${p.fields.titel}${p.fields.title}`}
-                image={p.fields.image}
-                title={p.fields.titel ? p.fields.titel : p.fields.title}
-                url={p.fields.url}
-                body={p.fields.body}
+              <TripCard
+                key={p.fields.title}
+                title={p.fields.title}
+                startDate={p.fields.startDate}
+                endDate={p.fields.endDate}
+                imageUrl={p.fields.image.fields.file.url}
+                price={p.fields.price}
               />
             ))
           : null}
