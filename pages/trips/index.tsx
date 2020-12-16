@@ -26,6 +26,7 @@ const Trips = () => {
                 startDate={p.fields.startDate}
                 endDate={p.fields.endDate}
                 imageUrl={p.fields.image.fields.file.url}
+                price={p.fields.price}
               />
             ))
           : null}

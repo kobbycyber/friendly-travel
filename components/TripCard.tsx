@@ -8,9 +8,10 @@ interface TripCardProps {
   startDate: string;
   endDate: string;
   imageUrl: string;
+  price: string;
 }
 
-const TripCard = ({ title, startDate, endDate, imageUrl }: TripCardProps) => {
+const TripCard = ({ title, startDate, endDate, imageUrl, price }: TripCardProps) => {
   const slug = getSlug(title);
 
   return (
@@ -18,8 +19,11 @@ const TripCard = ({ title, startDate, endDate, imageUrl }: TripCardProps) => {
       <div className={styles.tripCard}>
         <img src={imageUrl} />
         <div className={styles.textWrapper}>
-          <h2>{title}</h2>
-          <p>{getReformattedDate(startDate, endDate)}</p>
+          <div>
+            <h2>{title}</h2>
+            <p>{getReformattedDate(startDate, endDate)}</p>
+          </div>
+          <p className={styles.price}>{price}kr</p>
         </div>
       </div>
     </Link>

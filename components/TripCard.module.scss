@@ -34,16 +34,31 @@
 
   .textWrapper {
     flex: 1;
-    @include center-column;
-    text-align: center;
-    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 
-    h2 {
-      margin: 0;
-    }
+    div {
+      @include center-column;
+      flex: 1;
+      text-align: center;
+      margin: 0.5rem;
 
-    p {
-      margin: 0.5rem 0 0 0;
+      h2 {
+        margin: 0;
+      }
+
+      p {
+        margin: 0.5rem 0 0 0;
+      }
     }
+  }
+
+  .price {
+    color: $blue;
+    font-weight: bold;
+    margin: 0 0 1rem 0;
   }
 }
