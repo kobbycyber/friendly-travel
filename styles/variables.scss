@@ -9,6 +9,7 @@ $dark-grey: #999999;
 $black: #2e2e2e;
 
 $max-width: 900px;
+$media-min-width: 770px;
 
 @mixin center-row {
   display: flex;

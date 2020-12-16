@@ -3,13 +3,19 @@
 .tripCard {
   @include center-row;
   justify-content: flex-start;
-  margin: 0.5rem;
+  max-width: 425px;
+  margin: 0.5rem auto;
   border-radius: 0.4rem;
   box-shadow: 0 0 40px 15px rgba($light-grey, 0.2);
   cursor: pointer;
 
   &:hover {
     box-shadow: 0 0 40px 15px rgba($light-grey, 0.5);
+  }
+
+  @media screen and (min-width: $media-min-width) {
+    width: 425px;
+    margin: 0.5rem;
   }
 
   img {

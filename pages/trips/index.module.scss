@@ -1,4 +1,13 @@
+@import '../../styles/variables.scss';
+
 .tripCardWrapper {
-  max-width: 425px;
   margin: auto;
+
+  @media screen and (min-width: $media-min-width) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem auto;
+    max-width: 900px;
+  }
 }
