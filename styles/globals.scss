@@ -8,7 +8,22 @@ body {
   color: $black;
 }
 
-h1, h2, h3, h4, h5 {
+body > div {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  
+  main {
+    flex: 1;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: Yeseva One;
 }
 
