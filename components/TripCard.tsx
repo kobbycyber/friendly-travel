@@ -1,17 +1,20 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
-function TripCard({ alt, date, image, title, url, body }) {
-  const test = documentToHtmlString(body);
+interface TripCardProps {
+  title: string,
+  startDate: string,
+  endDate: string,
+  imageUrl: string,
+}
 
+function TripCard({ title, startDate, endDate, imageUrl }: TripCardProps) {  
   return (
     <div className="container">
-      {image && <img alt={alt} src={image.fields.file.url} />}
+      {/* <img src={imageUrl} /> */}
       <div className="text">
         <h2>{title}</h2>
-        <h4>{date}</h4>
+        {/* <h4>{endDate}</h4> */}
       </div>
-
-      <div dangerouslySetInnerHTML={{ __html: test }} />
     </div>
   );
 }

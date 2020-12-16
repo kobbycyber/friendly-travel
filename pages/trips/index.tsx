@@ -16,18 +16,15 @@ const Trips = () => {
 
   return (
     <>
-      <h1>all trips</h1>
       <div>
         {trips.length
           ? trips.map(p => (
               <TripCard
-                alt={p.fields.alt}
-                date={p.fields.date}
-                key={`${p.fields.titel}${p.fields.title}`}
-                image={p.fields.image}
-                title={p.fields.titel ? p.fields.titel : p.fields.title}
-                url={p.fields.url}
-                body={p.fields.body}
+                key={p.fields.title}
+                title={p.fields.title}
+                startDate={p.fields.startDate}
+                endDate={p.fields.endDate}
+                imageUrl={p.fields.image.fields.file.url}
               />
             ))
           : null}
