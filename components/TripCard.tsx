@@ -1,7 +1,6 @@
 import Link from 'next/link';
 
 import styles from './TripCard.module.scss';
-import buttonStyles from '../styles/buttons.module.scss';
 
 interface TripCardProps {
   title: string;
