@@ -25,6 +25,11 @@
     height: 140px;
     border-radius: 0.4rem;
     margin: 0.5rem;
+
+    @media screen and (min-width: $media-min-width) {
+      width: 200px;
+      height: 200px;
+    }
   }
 
   .textWrapper {
