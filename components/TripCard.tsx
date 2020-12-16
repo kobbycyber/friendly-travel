@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { reformatDate } from '../utils/helpFunctions';
 
 import styles from './TripCard.module.scss';
 
@@ -9,15 +10,11 @@ interface TripCardProps {
   imageUrl: string;
 }
 
-function TripCard({ title, startDate, endDate, imageUrl }: TripCardProps) {
-  const reformatDate = (start: string, end: string) => {
-    return '3 - 5 maj';
-  };
-
   const getSlug = (title: string) => {
     return 'san-fransisco';
   };
   const slug = getSlug(title);
+const TripCard = ({ title, startDate, endDate, imageUrl }: TripCardProps) => {
 
   return (
     <Link href={`/trips/${slug}/`}>
@@ -30,6 +27,6 @@ function TripCard({ title, startDate, endDate, imageUrl }: TripCardProps) {
       </div>
     </Link>
   );
-}
+};
 
 export default TripCard;
