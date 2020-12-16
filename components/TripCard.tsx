@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import styles from './TripCard.module.scss';
 import buttonStyles from '../styles/buttons.module.scss';
 
 interface TripCardProps {
@@ -20,16 +21,15 @@ function TripCard({ title, startDate, endDate, imageUrl }: TripCardProps) {
   const slug = getSlug(title);
 
   return (
-    <div>
-      <img src={imageUrl} />
-      <div>
-        <h2>{title}</h2>
-        <p>{reformatDate(startDate, endDate)}</p>
-        <Link href={`/trips/${slug}`}>
-          <a className={buttonStyles.primaryButton}>Read more</a>
-        </Link>
+    <Link href={`/trips/${slug}/`}>
+      <div className={styles.tripCard}>
+        <img src={imageUrl} />
+        <div className={styles.textWrapper}>
+          <h2>{title}</h2>
+          <p>{reformatDate(startDate, endDate)}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

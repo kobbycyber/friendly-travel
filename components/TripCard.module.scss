@@ -1,0 +1,38 @@
+@import '../styles/variables.scss';
+
+.tripCard {
+  @include center-row;
+  justify-content: flex-start;
+  margin: 0.5rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 40px 15px rgba($light-grey, 0.2);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 40px 15px rgba($light-grey, 0.5);
+  }
+
+  img {
+    justify-self: flex-end;
+    object-fit: cover;
+    width: 140px;
+    height: 140px;
+    border-radius: 0.4rem;
+    margin: 0.5rem;
+  }
+
+  .textWrapper {
+    flex: 1;
+    @include center-column;
+    text-align: center;
+    margin: 0.5rem;
+
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0.5rem 0 0 0;
+    }
+  }
+}

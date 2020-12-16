@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAllTrips } from '../../utils/fetchFunctions';
 import TripCard from '../../components/TripCard';
+import styles from './index.module.scss';
 
 const Trips = () => {
   const [trips, setTrips] = useState([]);
@@ -16,7 +17,7 @@ const Trips = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.tripCardWrapper}>
         {trips.length
           ? trips.map(p => (
               <TripCard
