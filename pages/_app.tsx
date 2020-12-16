@@ -30,6 +30,16 @@ function MyApp({ Component, pageProps }) {
       </header>
 
       <Component {...pageProps} />
+
+      <footer className={styles.footer}>
+        <Link href="/">
+          <a className={styles.homeLink}>
+            <h2>Friendly Travel</h2>
+            <img src={'/logo.svg'} alt="logo" />
+          </a>
+        </Link>
+        <p>Travel solo, not alone</p>
+      </footer>
     </>
   );
 }
