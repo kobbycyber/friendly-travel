@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getReformattedDate } from '../utils/helpFunctions';
+import { getReformattedDate, getSlug } from '../utils/helpFunctions';
 
 import styles from './TripCard.module.scss';
 
@@ -10,11 +10,8 @@ interface TripCardProps {
   imageUrl: string;
 }
 
-  const getSlug = (title: string) => {
-    return 'san-fransisco';
-  };
-  const slug = getSlug(title);
 const TripCard = ({ title, startDate, endDate, imageUrl }: TripCardProps) => {
+  const slug = getSlug(title);
 
   return (
     <Link href={`/trips/${slug}/`}>

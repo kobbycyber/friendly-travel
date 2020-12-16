@@ -25,3 +25,7 @@ export const getReformattedDate = (start: string, end: string) => {
     }`;
   }
 };
+
+export const getSlug = (title: string) => {
+  return title.toLowerCase().split(' ').join('-');
+};
