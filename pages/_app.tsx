@@ -29,7 +29,9 @@ function MyApp({ Component, pageProps }) {
         </nav>
       </header>
 
-      <Component {...pageProps} />
+      <main>
+        <Component {...pageProps} />
+      </main>
 
       <footer className={styles.footer}>
         <Link href="/">
