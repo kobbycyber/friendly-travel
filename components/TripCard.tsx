@@ -1,6 +1,6 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
-function Post({ alt, date, image, title, url, body }) {
+function TripCard({ alt, date, image, title, url, body }) {
   const test = documentToHtmlString(body);
 
   return (
@@ -16,4 +16,4 @@ function Post({ alt, date, image, title, url, body }) {
   );
 }
 
-export default Post;
+export default TripCard;

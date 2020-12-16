@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAllTrips } from '../../utils/fetchFunctions';
-import Post from '../../components/Post';
+import TripCard from '../../components/TripCard';
 
 const Trips = () => {
   const [trips, setTrips] = useState([]);
@@ -20,7 +20,7 @@ const Trips = () => {
       <div>
         {trips.length
           ? trips.map(p => (
-              <Post
+              <TripCard
                 alt={p.fields.alt}
                 date={p.fields.date}
                 key={`${p.fields.titel}${p.fields.title}`}
