@@ -1,4 +1,4 @@
-export const reformatDate = (start: string, end: string) => {
+export const getReformattedDate = (start: string, end: string) => {
   const monthNames = [
     'January',
     'February',

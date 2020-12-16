@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { reformatDate } from '../utils/helpFunctions';
+import { getReformattedDate } from '../utils/helpFunctions';
 
 import styles from './TripCard.module.scss';
 
@@ -22,7 +22,7 @@ const TripCard = ({ title, startDate, endDate, imageUrl }: TripCardProps) => {
         <img src={imageUrl} />
         <div className={styles.textWrapper}>
           <h2>{title}</h2>
-          <p>{reformatDate(startDate, endDate)}</p>
+          <p>{getReformattedDate(startDate, endDate)}</p>
         </div>
       </div>
     </Link>
