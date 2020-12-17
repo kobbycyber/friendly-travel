@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getReformattedDate, getSlug } from '../utils/helpFunctions';
+import { getReformattedDate, getSlug } from '../../utils/helpFunctions';
 
 import styles from './TripCard.module.scss';
 

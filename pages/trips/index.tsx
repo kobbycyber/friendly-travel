@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
-import TripCard from '../../components/TripCard';
+import TripCard from '../../components/TripCard/TripCard';
 import styles from './index.module.scss';
 
-const Trips = () => {
+const TripsPage = () => {
   const [trips, setTrips] = useState([]);
 
   useEffect(() => {
@@ -59,4 +59,4 @@ const Trips = () => {
   );
 };
 
-export default Trips;
+export default TripsPage;

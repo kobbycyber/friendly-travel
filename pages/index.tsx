@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TripGalleryCard from '../components/TripGalleryCard';
+import TripGalleryCard from '../components/TripGalleryCard/TripGalleryCard';
 import { fetchTrips } from '../utils/fetchFunctions';
 
 import styles from './index.module.scss';

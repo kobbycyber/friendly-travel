@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { getSlug } from '../utils/helpFunctions';
+import { getSlug } from '../../utils/helpFunctions';
 import styles from './TripGalleryCard.module.scss';
 
 interface TripGalleryCard {

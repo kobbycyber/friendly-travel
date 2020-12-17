@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>Friendly Travel</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" />
         <link
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Yeseva+One&display=swap"
           rel="stylesheet"

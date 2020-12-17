@@ -10,7 +10,7 @@ import buttonStyles from '../../styles/buttons.module.scss';
 
 import { TripEntry } from '../../types';
 
-const Trip = () => {
+const TripPage = () => {
   const [trip, setTrip] = useState<TripEntry | null>(null);
   const [notFound, setNotFound] = useState(false);
 
@@ -66,4 +66,4 @@ const Trip = () => {
   );
 };
 
-export default Trip;
+export default TripPage;
