@@ -10,6 +10,8 @@ $black: #2e2e2e;
 
 $max-width: 900px;
 $media-min-width: 770px;
+$max-text-width: 600px;
+$margin: 2rem;
 
 @mixin center-row {
   display: flex;

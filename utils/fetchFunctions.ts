@@ -6,9 +6,10 @@ const client = createClient({
   accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
 });
 
-export const fetchAllTrips = async () => {
+export const fetchTrips = async (limit = 100) => {
   const entries = await client.getEntries({
     content_type: 'trip',
+    limit: limit,
   });
 
   if (entries.items) {

@@ -1,9 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import TripGalleryCard from '../components/TripGalleryCard';
+import { fetchTrips } from '../utils/fetchFunctions';
+
+import styles from './index.module.scss';
 
 function HomePage() {
+  const [trips, setTrips] = useState([]);
+
+  useEffect(() => {
+    async function getTrips() {
+      const allTrips = await fetchTrips(5);
+      setTrips([...allTrips]);
+    }
+
+    getTrips();
+  }, []);
+
   return (
     <>
-      <h1>start</h1>
+      <article className={styles.heroWrapper}>
+        <div className={styles.logoWrapper}>
+          <h1>Friendly Travel</h1>
+          <img src="/logo.svg" alt="logo" />
+        </div>
+        <p>Travel solo, not alone</p>
+      </article>
+
+      <article className={styles.infoWrapper}>
+        <h2>Ready for an Adventure?</h2>
+        <p>
+          We've got you! A lot of people wants to travel but has no one to accompany them. While
+          traveling alone is always thrilling, it has its downsides as well. Enter Friendly Travel,
+          where you can join a group of likeminded travelers for great experiences and new friends.
+        </p>
+      </article>
+
+      <article className={styles.tripCardWrapper}>
+        {trips.map(t => (
+          <TripGalleryCard
+            key={t.fields.title}
+            title={t.fields.title}
+            imageUrl={t.fields.image.fields.file.url}
+          />
+        ))}
+      </article>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchAllTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
+import { fetchTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
 import TripCard from '../../components/TripCard';
 import styles from './index.module.scss';
 
@@ -8,7 +8,7 @@ const Trips = () => {
 
   useEffect(() => {
     async function getTrips() {
-      const allTrips = await fetchAllTrips();
+      const allTrips = await fetchTrips();
       setTrips([...allTrips]);
     }
 
