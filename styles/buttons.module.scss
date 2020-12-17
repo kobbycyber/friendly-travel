@@ -11,3 +11,16 @@
     background-color: $dark-blue;
   }
 }
+
+.secondaryButton {
+  background-color: $white;
+  color: $black;
+  padding: 1rem 2rem;
+  border-radius: 100rem;
+  border: 1px solid $dark-grey;
+  display: inline-block;
+
+  &:hover {
+    border: 1px solid $black;
+  }
+}

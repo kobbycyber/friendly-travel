@@ -1,4 +1,5 @@
 import { createClient } from 'contentful';
+import { TripEntry } from '../types';
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -24,4 +25,31 @@ export const fetchSortedTrips = async (orderBy: string) => {
   if (entries.items) {
     return entries.items;
   }
+};
+
+export const fetchTripBySlug = async (slug: string) => {
+  const title = slug.split('-').join(' ');
+
+  const entries = await client.getEntries({
+    content_type: 'trip',
+    'fields.title[match]': title,
+  });
+
+  if (entries.items.length === 1) {
+    return formatReturnTripEntry(entries.items[0].fields);
+  } else {
+    return null;
+  }
+};
+
+const formatReturnTripEntry = (entry: any) => {
+  const trip: TripEntry = {
+    title: entry.title,
+    startDate: entry.startDate,
+    endDate: entry.endDate,
+    body: entry.body,
+    price: entry.price,
+    imageUrl: entry.image.fields.file.url,
+  };
+  return trip;
 };

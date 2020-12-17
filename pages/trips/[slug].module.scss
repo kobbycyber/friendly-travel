@@ -1,0 +1,55 @@
+@import '../../styles/variables.scss';
+
+.tripWrapper {
+  @include center-column;
+  margin: 2rem 0 5rem;
+
+  > * {
+    margin: 0 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+
+    @media screen and (min-width: $media-min-width) {
+      font-size: 3rem;
+    }
+  }
+
+  h3 {
+    margin-bottom: 2rem;
+  }
+
+  img {
+    object-fit: cover;
+    width: 100vw;
+    max-height: 500px;
+  }
+
+  .textBody {
+    max-width: 600px;
+
+    @media screen and (min-width: $media-min-width) {
+      margin: 3rem 0;
+    }
+  }
+
+  .price {
+    margin: 2rem 0 0 0;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.25rem;
+    color: $blue;
+
+    @media screen and (min-width: $media-min-width) {
+      margin: 2rem 0;
+    }
+  }
+
+  .buttonWrapper {
+    a {
+      margin: 1rem 0.5rem;
+    }
+  }
+}
