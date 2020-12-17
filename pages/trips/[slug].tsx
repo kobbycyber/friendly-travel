@@ -30,7 +30,7 @@ const Trip = () => {
     }
 
     getTrips();
-  }, []);
+  }, [slug]);
 
   if (notFound) {
     return '404';
