@@ -1,0 +1,29 @@
+@import '../../../styles/variables.scss';
+
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+
+  img {
+    margin-left: 1rem;
+  }
+}
+
+.radioWrapper {
+  padding: 1rem 0;
+  max-width: 300px;
+  margin: auto;
+
+  h4 {
+    margin: 0;
+  }
+
+  .radioInputWrapper {
+    margin: 1rem 0;
+
+    input {
+      margin-right: 0.5rem;
+    }
+  }
+}

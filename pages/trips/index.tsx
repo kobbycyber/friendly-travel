@@ -7,10 +7,10 @@ const TripsPage = () => {
   const [trips, setTrips] = useState([]);
 
   useEffect(() => {
-    async function getTrips() {
+    const getTrips = async () => {
       const allTrips = await fetchTrips();
       setTrips([...allTrips]);
-    }
+    };
 
     getTrips();
   }, []);

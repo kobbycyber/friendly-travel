@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+.confirmationWrapper {
+  text-align: center;
+
+  span {
+    font-weight: bold;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 0.4rem;
+    margin: $margin 0;
+  }
+}

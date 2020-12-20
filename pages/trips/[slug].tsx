@@ -14,11 +14,10 @@ const TripPage = () => {
   const [trip, setTrip] = useState<TripEntry | null>(null);
   const [notFound, setNotFound] = useState(false);
 
-  const router = useRouter();
-  const { slug } = router.query;
+  const { slug } = useRouter().query;
 
   useEffect(() => {
-    async function getTrips() {
+    const getTrips = async () => {
       if (typeof slug === 'string') {
         const trip = await fetchTripBySlug(slug);
         if (trip) {
@@ -27,7 +26,7 @@ const TripPage = () => {
           setNotFound(true);
         }
       }
-    }
+    };
 
     getTrips();
   }, [slug]);
@@ -58,7 +57,7 @@ const TripPage = () => {
         <Link href="/trips/">
           <a className={buttonStyles.secondaryButton}>Back</a>
         </Link>
-        <Link href="/">
+        <Link href={`/booking/${slug}/`}>
           <a className={buttonStyles.primaryButton}>Book now</a>
         </Link>
       </div>

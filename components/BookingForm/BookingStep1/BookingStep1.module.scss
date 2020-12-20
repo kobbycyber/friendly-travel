@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-bottom: 1rem;
+
+  input {
+    line-height: 1.6;
+    margin-top: 0.2rem;
+    padding: 0.5rem;
+    border: 1px solid $light-grey;
+    font-family: 'Montserrat';
+
+    &.invalid {
+      border: 1px solid $warning-red;
+    }
+
+    &:focus {
+      border: 1px solid $blue;
+      outline: none;
+    }
+  }
+}

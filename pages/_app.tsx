@@ -3,7 +3,7 @@ import Head from 'next/head';
 import '../styles/globals.scss';
 import styles from './App.module.scss';
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
@@ -44,6 +44,6 @@ function MyApp({ Component, pageProps }) {
       </footer>
     </>
   );
-}
+};
 
 export default MyApp;

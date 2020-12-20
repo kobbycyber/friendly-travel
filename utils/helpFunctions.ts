@@ -29,3 +29,8 @@ export const getReformattedDate = (start: string, end: string) => {
 export const getSlug = (title: string) => {
   return title.toLowerCase().split(' ').join('-');
 };
+
+export const validEmail = (email: string) => {
+  const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return validEmailRegex.test(String(email).toLowerCase());
+};

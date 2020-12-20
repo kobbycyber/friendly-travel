@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.bookingWrapper {
+  @include center-column;
+  margin: $margin;
+
+  h1,
+  h2,
+  h3 {
+    margin: 0 0 0.5rem 0;
+    text-align: center;
+  }
+
+  .price {
+    color: $blue;
+  }
+}

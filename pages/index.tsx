@@ -4,14 +4,14 @@ import { fetchTrips } from '../utils/fetchFunctions';
 
 import styles from './index.module.scss';
 
-function HomePage() {
+const HomePage = () => {
   const [trips, setTrips] = useState([]);
 
   useEffect(() => {
-    async function getTrips() {
+    const getTrips = async () => {
       const allTrips = await fetchTrips(5);
       setTrips([...allTrips]);
-    }
+    };
 
     getTrips();
   }, []);
@@ -46,6 +46,6 @@ function HomePage() {
       </article>
     </>
   );
-}
+};
 
 export default HomePage;

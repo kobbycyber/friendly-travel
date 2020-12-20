@@ -1,26 +1,53 @@
 @import './variables.scss';
 
+.primaryButton,
+.secondaryButton {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 100rem;
+  line-height: 1.6;
+  font-family: 'Montserrat';
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+}
+
 .primaryButton {
   background-color: $blue;
   color: $white;
-  padding: 1rem 2rem;
-  border-radius: 100rem;
-  display: inline-block;
+  border: none;
+  border: 1px solid $blue;
 
   &:hover {
     background-color: $dark-blue;
+  }
+
+  &:focus {
+    border: 1px solid $black;
   }
 }
 
 .secondaryButton {
   background-color: $white;
   color: $black;
-  padding: 1rem 2rem;
-  border-radius: 100rem;
   border: 1px solid $dark-grey;
-  display: inline-block;
 
   &:hover {
     border: 1px solid $black;
+  }
+
+  &:focus {
+    border: 1px solid $blue;
+  }
+}
+
+.buttonWrapper {
+  @include center-row;
+  margin: $margin 0;
+
+  a,
+  button,
+  input[type='submit'] {
+    margin: 0 0.5rem;
   }
 }

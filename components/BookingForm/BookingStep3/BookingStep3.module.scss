@@ -1,0 +1,41 @@
+@import '../../../styles/variables.scss';
+
+.directions {
+  text-align: center;
+}
+
+.divider {
+  height: 1px;
+  width: 90%;
+  background-color: $light-grey;
+  margin: $margin auto;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: $margin 0;
+
+  @media screen and (min-width: $media-min-width) {
+    flex-direction: row;
+  }
+}
+
+.innerInfoWrapper {
+  margin: 1rem 0;
+
+  @media screen and (min-width: $media-min-width) {
+    margin: 1rem;
+  }
+
+  h4,
+  p {
+    margin: 0;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    word-break: break-word;
+  }
+}
