@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
 import TripCard from '../../components/TripCard/TripCard';
-import styles from './index.module.scss';
+import styles from './TripsPage.module.scss';
 import { TripEntry } from '../../types';
 
 const TripsPage = () => {

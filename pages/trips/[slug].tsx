@@ -5,7 +5,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { fetchTripBySlug } from '../../utils/fetchFunctions';
 import { getReformattedDate } from '../../utils/helpFunctions';
 
-import styles from './[slug].module.scss';
+import styles from './TripPage.module.scss';
 import buttonStyles from '../../styles/buttons.module.scss';
 
 import { TripEntry } from '../../types';

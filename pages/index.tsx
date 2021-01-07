@@ -3,7 +3,7 @@ import TripGalleryCard from '../components/TripGalleryCard/TripGalleryCard';
 import { TripEntry } from '../types';
 import { fetchTrips } from '../utils/fetchFunctions';
 
-import styles from './index.module.scss';
+import styles from './HomePage.module.scss';
 
 const HomePage = () => {
   const [trips, setTrips] = useState<TripEntry[]>([]);
