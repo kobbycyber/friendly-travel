@@ -27,3 +27,11 @@ $margin: 2rem;
   justify-content: center;
   align-items: center;
 }
+
+@mixin link {
+  color: $blue;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

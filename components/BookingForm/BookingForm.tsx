@@ -4,6 +4,7 @@ import BookingStep1 from './BookingStep1/BookingStep1';
 import BookingStep2 from './BookingStep2/BookingStep2';
 import BookingStep3 from './BookingStep3/BookingStep3';
 import BookingStep4 from './BookingStep4/BookingStep4';
+import BookingError from './BookingError/BookingError';
 
 import styles from './BookingForm.module.scss';
 import {
@@ -48,10 +49,11 @@ const BookingForm = ({ trip }: BookingFormProps) => {
     }
   };
 
-  if (step === 4) {
+  if (step === 4 || !step) {
     return (
       <article className={styles.bookingFormWrapper}>
-        <BookingStep4 email={personalInformation.email} imageUrl={trip.imageUrl} />
+        {step === 4 && <BookingStep4 email={personalInformation.email} imageUrl={trip.imageUrl} />}
+        {step === 0 && <BookingError setStep={setStep} />}
       </article>
     );
   }

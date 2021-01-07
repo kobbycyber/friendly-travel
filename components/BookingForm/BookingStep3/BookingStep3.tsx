@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './BookingStep3.module.scss';
 import buttonStyles from '../../../styles/buttons.module.scss';
-import { AdditionalChoices, PersonalInformation, SetStep, TripEntry } from '../../../types';
+import {
+  AdditionalChoices,
+  PersonalInformation,
+  SetStep,
+  SubmitFormInput,
+  TripEntry,
+} from '../../../types';
 
 interface BookingStep3Props {
   trip: TripEntry;
@@ -16,6 +22,28 @@ const BookingStep3 = ({
   personalInformation,
   additionalChoices,
 }: BookingStep3Props) => {
+  const handleConfirm = async () => {
+    const data: SubmitFormInput = {
+      trip,
+      personalInformation,
+      additionalChoices,
+    };
+
+    const request = await fetch('/api/submitForm/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (request.status === 200) {
+      setStep(4);
+    } else {
+      setStep(0);
+    }
+  };
+
   return (
     <article>
       <h3>Your Booking</h3>
@@ -69,7 +97,7 @@ const BookingStep3 = ({
           Back
         </button>
 
-        <button className={buttonStyles.primaryButton} onClick={() => setStep(4)}>
+        <button className={buttonStyles.primaryButton} onClick={handleConfirm}>
           Confirm
         </button>
       </div>

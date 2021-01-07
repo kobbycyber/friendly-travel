@@ -21,6 +21,12 @@ export interface AdditionalChoices {
   departure: string;
 }
 
+export interface SubmitFormInput {
+  trip: TripEntry;
+  personalInformation: PersonalInformation;
+  additionalChoices: AdditionalChoices;
+}
+
 export type SetAdditionalChoices = (input: AdditionalChoices) => void;
 
 export type HandleNextBookingStep1 = (input: PersonalInformation) => void;
