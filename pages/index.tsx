@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import TripGalleryCard from '../components/TripGalleryCard/TripGalleryCard';
+import { TripEntry } from '../types';
 import { fetchTrips } from '../utils/fetchFunctions';
 
 import styles from './index.module.scss';
 
 const HomePage = () => {
-  const [trips, setTrips] = useState([]);
+  const [trips, setTrips] = useState<TripEntry[]>([]);
 
   useEffect(() => {
     const getTrips = async () => {
@@ -36,12 +37,8 @@ const HomePage = () => {
       </article>
 
       <article className={styles.tripCardWrapper}>
-        {trips.map(t => (
-          <TripGalleryCard
-            key={t.fields.title}
-            title={t.fields.title}
-            imageUrl={t.fields.image.fields.file.url}
-          />
+        {trips.map(trip => (
+          <TripGalleryCard key={trip.title} title={trip.title} imageUrl={trip.imageUrl} />
         ))}
       </article>
     </>

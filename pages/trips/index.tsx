@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { fetchTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
 import TripCard from '../../components/TripCard/TripCard';
 import styles from './index.module.scss';
+import { TripEntry } from '../../types';
 
 const TripsPage = () => {
-  const [trips, setTrips] = useState([]);
+  const [trips, setTrips] = useState<TripEntry[]>([]);
 
   useEffect(() => {
     const getTrips = async () => {
@@ -43,14 +44,14 @@ const TripsPage = () => {
 
       <div className={styles.tripCardWrapper}>
         {trips.length
-          ? trips.map(p => (
+          ? trips.map(trip => (
               <TripCard
-                key={p.fields.title}
-                title={p.fields.title}
-                startDate={p.fields.startDate}
-                endDate={p.fields.endDate}
-                imageUrl={p.fields.image.fields.file.url}
-                price={p.fields.price}
+                key={trip.title}
+                title={trip.title}
+                startDate={trip.startDate}
+                endDate={trip.endDate}
+                imageUrl={trip.imageUrl}
+                price={trip.price}
               />
             ))
           : null}

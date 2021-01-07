@@ -1,5 +1,6 @@
 import { createClient } from 'contentful';
 import { TripEntry } from '../types';
+import { getFormattedPrice } from './helpFunctions';
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
@@ -13,7 +14,7 @@ export const fetchTrips = async (limit = 100) => {
   });
 
   if (entries.items) {
-    return entries.items;
+    return entries.items.map(item => formatReturnTripEntry(item.fields));
   }
 };
 
@@ -24,7 +25,7 @@ export const fetchSortedTrips = async (orderBy: string) => {
   });
 
   if (entries.items) {
-    return entries.items;
+    return entries.items.map(item => formatReturnTripEntry(item.fields));
   }
 };
 
@@ -49,7 +50,7 @@ const formatReturnTripEntry = (entry: any) => {
     startDate: entry.startDate,
     endDate: entry.endDate,
     body: entry.body,
-    price: entry.price,
+    price: getFormattedPrice(entry.price),
     imageUrl: entry.image.fields.file.url,
   };
   return trip;
