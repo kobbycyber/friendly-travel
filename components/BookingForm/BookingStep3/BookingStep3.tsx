@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './BookingStep3.module.scss';
 import buttonStyles from '../../../styles/buttons.module.scss';
 import {
@@ -8,6 +8,7 @@ import {
   SubmitFormInput,
   TripEntry,
 } from '../../../types';
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner';
 
 interface BookingStep3Props {
   trip: TripEntry;
@@ -22,7 +23,11 @@ const BookingStep3 = ({
   personalInformation,
   additionalChoices,
 }: BookingStep3Props) => {
+  const [waitingForResponse, setWaitingForResponse] = useState(false);
+
   const handleConfirm = async () => {
+    setWaitingForResponse(true);
+
     const data: SubmitFormInput = {
       trip,
       personalInformation,
@@ -43,6 +48,10 @@ const BookingStep3 = ({
       setStep(0);
     }
   };
+
+  if (waitingForResponse) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <article>

@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { fetchTripBySlug } from '../../utils/fetchFunctions';
 import { getReformattedDate } from '../../utils/helpFunctions';
+
 import BookingForm from '../../components/BookingForm/BookingForm';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+
 import styles from './BookingPage.module.scss';
+
 import { TripEntry } from '../../types';
 
 const BookingPage = () => {
@@ -32,7 +36,7 @@ const BookingPage = () => {
   }
 
   if (!trip) {
-    return 'loading';
+    return <LoadingSpinner />;
   }
 
   return (

@@ -1,0 +1,6 @@
+@import '../../styles/variables.scss';
+
+.loadingWrapper {
+  @include center-column;
+  min-height: 25rem;
+}
