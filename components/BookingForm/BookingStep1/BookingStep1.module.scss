@@ -1,6 +1,7 @@
 @import '../../../styles/variables.scss';
 
 .inputWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -21,5 +22,11 @@
       border: 1px solid $blue;
       outline: none;
     }
+  }
+
+  .warningImg {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
   }
 }

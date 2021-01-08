@@ -66,6 +66,18 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
     }
   };
 
+  const errorSymbol = (inputName: string) => {
+    if (inputName === 'email') {
+      if (!validEmail(info.email.value) && info.email.touched) {
+        return <img className={styles.warningImg} src="/error.svg" alt="warning-symbol" />;
+      }
+    }
+
+    if (!info[inputName].value && info[inputName].touched) {
+      return <img className={styles.warningImg} src="/error.svg" alt="warning-symbol" />;
+    }
+  };
+
   return (
     <form>
       <div className={styles.inputWrapper}>
@@ -77,7 +89,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
           onChange={e => handleSetPersonalInfo('name', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, name: { value: o.name.value, touched: true } }))}
         />
+        {errorSymbol('name')}
       </div>
+
       <div className={styles.inputWrapper}>
         <label htmlFor="email">Email</label>
         <input
@@ -93,7 +107,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
           onChange={e => handleSetPersonalInfo('email', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, email: { value: o.email.value, touched: true } }))}
         />
+        {errorSymbol('email')}
       </div>
+
       <div className={styles.inputWrapper}>
         <label htmlFor="phone">Phone</label>
         <input
@@ -103,7 +119,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
           onChange={e => handleSetPersonalInfo('phone', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, phone: { value: o.phone.value, touched: true } }))}
         />
+        {errorSymbol('phone')}
       </div>
+
       <div className={styles.inputWrapper}>
         <label htmlFor="street">Street</label>
         <input
@@ -113,7 +131,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
           onChange={e => handleSetPersonalInfo('street', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, street: { value: o.street.value, touched: true } }))}
         />
+        {errorSymbol('street')}
       </div>
+
       <div className={styles.inputWrapper}>
         <label htmlFor="postCode">Post code</label>
         <input
@@ -125,7 +145,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
             setInfo(o => ({ ...o, postCode: { value: o.postCode.value, touched: true } }))
           }
         />
+        {errorSymbol('postCode')}
       </div>
+
       <div className={styles.inputWrapper}>
         <label htmlFor="city">City</label>
         <input
@@ -135,6 +157,7 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
           onChange={e => handleSetPersonalInfo('city', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, city: { value: o.city.value, touched: true } }))}
         />
+        {errorSymbol('city')}
       </div>
 
       <div className={buttonStyles.buttonWrapper}>
