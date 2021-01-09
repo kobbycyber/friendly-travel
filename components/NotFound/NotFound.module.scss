@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.notFoundWrapper {
+  @include center-column;
+  max-width: $max-text-width;
+  text-align: center;
+  margin: auto;
+
+  .textWrapper {
+    margin: $margin;
+    margin-bottom: 0;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    a {
+      @include link;
+    }
+  }
+}

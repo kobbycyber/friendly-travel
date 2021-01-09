@@ -6,6 +6,7 @@ import { fetchTripBySlug } from '../../utils/fetchFunctions';
 import { getReformattedDate } from '../../utils/helpFunctions';
 
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import NotFound from '../../components/NotFound/NotFound';
 
 import styles from './TripPage.module.scss';
 import buttonStyles from '../../styles/buttons.module.scss';
@@ -34,7 +35,7 @@ const TripPage = () => {
   }, [slug]);
 
   if (notFound) {
-    return '404';
+    return <NotFound />;
   }
 
   if (!trip) {

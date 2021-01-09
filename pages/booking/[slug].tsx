@@ -5,6 +5,7 @@ import { getReformattedDate } from '../../utils/helpFunctions';
 
 import BookingForm from '../../components/BookingForm/BookingForm';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import NotFound from '../../components/NotFound/NotFound';
 
 import styles from './BookingPage.module.scss';
 
@@ -32,7 +33,7 @@ const BookingPage = () => {
   }, [slug]);
 
   if (notFound) {
-    return '404';
+    return <NotFound />;
   }
 
   if (!trip) {
