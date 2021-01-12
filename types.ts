@@ -34,8 +34,8 @@ export interface SubmitFormInput {
   additionalChoices: AdditionalChoices;
 }
 
-export type SetAdditionalChoices = (input: AdditionalChoices) => void;
+export type SetPersonalInformation = (input: PersonalInformation) => void;
 
-export type HandleNextBookingStep1 = (input: PersonalInformation) => void;
+export type SetAdditionalChoices = (input: AdditionalChoices) => void;
 
 export type SetStep = (input: number) => void;

@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import styles from './BookingStep2.module.scss';
 import buttonStyles from '../../../styles/buttons.module.scss';
-import { SetAdditionalChoices, SetStep } from '../../../types';
+import { AdditionalChoices, SetAdditionalChoices, SetStep } from '../../../types';
 
 interface BookingStep2Props {
   setStep: SetStep;
   setAdditionalChoices: SetAdditionalChoices;
+  additionalChoices?: AdditionalChoices;
 }
 
-const BookingStep2 = ({ setStep, setAdditionalChoices }: BookingStep2Props) => {
-  const [selectedRoom, setSelectedRoom] = useState<string>();
-  const [selectedDeparture, setSelectedDeparture] = useState<string>();
+const BookingStep2 = ({ setStep, setAdditionalChoices, additionalChoices }: BookingStep2Props) => {
+  const [selectedRoom, setSelectedRoom] = useState<string>(
+    additionalChoices ? additionalChoices.room : ''
+  );
+  const [selectedDeparture, setSelectedDeparture] = useState<string>(
+    additionalChoices ? additionalChoices.departure : ''
+  );
   const [error, setError] = useState(false);
 
   const handleClick = (e: React.MouseEvent) => {

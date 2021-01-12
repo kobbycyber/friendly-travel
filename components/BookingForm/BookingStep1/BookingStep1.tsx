@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { validEmail } from '../../../utils/helpFunctions';
 import styles from './BookingStep1.module.scss';
 import buttonStyles from '../../../styles/buttons.module.scss';
-import { HandleNextBookingStep1 } from '../../../types';
+import { PersonalInformation, SetPersonalInformation, SetStep } from '../../../types';
 
 interface BookingStep1Props {
-  handleNextBookingStep1: HandleNextBookingStep1;
+  setStep: SetStep;
+  setPersonalInformation: SetPersonalInformation;
+  personalInformation?: PersonalInformation;
 }
 
 interface FormField {
@@ -24,18 +26,35 @@ interface InfoForm {
   city: FormField;
 }
 
-const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
-  const [info, setInfo] = useState<InfoForm>({
-    name: { value: '', touched: false },
-    email: { value: '', touched: false },
-    phone: { value: '', touched: false },
-    street: { value: '', touched: false },
-    postCode: { value: '', touched: false },
-    city: { value: '', touched: false },
-  });
+type InfoFormKey = 'name' | 'email' | 'phone' | 'street' | 'postCode' | 'city';
+
+const BookingStep1 = ({
+  setStep,
+  setPersonalInformation,
+  personalInformation,
+}: BookingStep1Props) => {
+  const [info, setInfo] = useState<InfoForm>(
+    personalInformation
+      ? {
+          name: { value: personalInformation.name, touched: false },
+          email: { value: personalInformation.email, touched: false },
+          phone: { value: personalInformation.phone, touched: false },
+          street: { value: personalInformation.street, touched: false },
+          postCode: { value: personalInformation.postCode, touched: false },
+          city: { value: personalInformation.city, touched: false },
+        }
+      : {
+          name: { value: '', touched: false },
+          email: { value: '', touched: false },
+          phone: { value: '', touched: false },
+          street: { value: '', touched: false },
+          postCode: { value: '', touched: false },
+          city: { value: '', touched: false },
+        }
+  );
   const { slug } = useRouter().query;
 
-  const handleSetPersonalInfo = (key: string, value: string) => {
+  const handleSetInfoValue = (key: InfoFormKey, value: string) => {
     setInfo(o => ({ ...o, [key]: { value, touched: info[key].touched } }));
   };
 
@@ -51,7 +70,8 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
       info.city.value &&
       validEmail(info.email.value)
     ) {
-      handleNextBookingStep1({
+      setStep(2);
+      setPersonalInformation({
         name: info.name.value,
         email: info.email.value,
         phone: info.phone.value,
@@ -61,12 +81,18 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
       });
     } else {
       Object.keys(info).forEach(key => {
-        setInfo(o => ({ ...o, [key]: { value: info[key].value, touched: true } }));
+        setInfo(o => ({
+          ...o,
+          [key]: {
+            value: info[key as InfoFormKey].value,
+            touched: true,
+          },
+        }));
       });
     }
   };
 
-  const errorSymbol = (inputName: string) => {
+  const errorSymbol = (inputName: InfoFormKey) => {
     if (inputName === 'email') {
       if (!validEmail(info.email.value) && info.email.touched) {
         return <img className={styles.warningImg} src="/error.svg" alt="warning-symbol" />;
@@ -85,8 +111,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
         <input
           type="text"
           id="name"
+          value={info.name.value}
           className={styles[info.name.touched && !info.name.value ? 'invalid' : '']}
-          onChange={e => handleSetPersonalInfo('name', e.target.value)}
+          onChange={e => handleSetInfoValue('name', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, name: { value: o.name.value, touched: true } }))}
         />
         {errorSymbol('name')}
@@ -97,6 +124,7 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
         <input
           type="email"
           id="email"
+          value={info.email.value}
           className={
             styles[
               info.email.touched && (!info.email.value || !validEmail(info.email.value))
@@ -104,7 +132,7 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
                 : ''
             ]
           }
-          onChange={e => handleSetPersonalInfo('email', e.target.value)}
+          onChange={e => handleSetInfoValue('email', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, email: { value: o.email.value, touched: true } }))}
         />
         {errorSymbol('email')}
@@ -115,8 +143,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
         <input
           type="number"
           id="phone"
+          value={info.phone.value}
           className={styles[info.phone.touched && !info.phone.value ? 'invalid' : '']}
-          onChange={e => handleSetPersonalInfo('phone', e.target.value)}
+          onChange={e => handleSetInfoValue('phone', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, phone: { value: o.phone.value, touched: true } }))}
         />
         {errorSymbol('phone')}
@@ -127,8 +156,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
         <input
           type="text"
           id="street"
+          value={info.street.value}
           className={styles[info.street.touched && !info.street.value ? 'invalid' : '']}
-          onChange={e => handleSetPersonalInfo('street', e.target.value)}
+          onChange={e => handleSetInfoValue('street', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, street: { value: o.street.value, touched: true } }))}
         />
         {errorSymbol('street')}
@@ -139,8 +169,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
         <input
           type="text"
           id="postCode"
+          value={info.postCode.value}
           className={styles[info.postCode.touched && !info.postCode.value ? 'invalid' : '']}
-          onChange={e => handleSetPersonalInfo('postCode', e.target.value)}
+          onChange={e => handleSetInfoValue('postCode', e.target.value)}
           onBlur={() =>
             setInfo(o => ({ ...o, postCode: { value: o.postCode.value, touched: true } }))
           }
@@ -153,8 +184,9 @@ const BookingStep1 = ({ handleNextBookingStep1 }: BookingStep1Props) => {
         <input
           type="text"
           id="city"
+          value={info.city.value}
           className={styles[info.city.touched && !info.city.value ? 'invalid' : '']}
-          onChange={e => handleSetPersonalInfo('city', e.target.value)}
+          onChange={e => handleSetInfoValue('city', e.target.value)}
           onBlur={() => setInfo(o => ({ ...o, city: { value: o.city.value, touched: true } }))}
         />
         {errorSymbol('city')}

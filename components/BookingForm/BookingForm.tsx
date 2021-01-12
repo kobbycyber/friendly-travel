@@ -7,12 +7,7 @@ import BookingStep4 from './BookingStep4/BookingStep4';
 import BookingError from './BookingError/BookingError';
 
 import styles from './BookingForm.module.scss';
-import {
-  AdditionalChoices,
-  HandleNextBookingStep1,
-  PersonalInformation,
-  TripEntry,
-} from '../../types';
+import { AdditionalChoices, PersonalInformation, TripEntry } from '../../types';
 
 interface BookingFormProps {
   trip: TripEntry;
@@ -25,16 +20,23 @@ const BookingForm = ({ trip }: BookingFormProps) => {
 
   const renderStep = () => {
     if (step === 1) {
-      const handleNextBookingStep1: HandleNextBookingStep1 = personalInformation => {
-        setStep(2);
-        setPersonalInformation(personalInformation);
-      };
-
-      return <BookingStep1 handleNextBookingStep1={handleNextBookingStep1} />;
+      return (
+        <BookingStep1
+          setStep={setStep}
+          setPersonalInformation={setPersonalInformation}
+          personalInformation={personalInformation}
+        />
+      );
     }
 
     if (step === 2) {
-      return <BookingStep2 setStep={setStep} setAdditionalChoices={setAdditionalChoices} />;
+      return (
+        <BookingStep2
+          setStep={setStep}
+          setAdditionalChoices={setAdditionalChoices}
+          additionalChoices={additionalChoices}
+        />
+      );
     }
 
     if (step === 3) {
@@ -42,18 +44,25 @@ const BookingForm = ({ trip }: BookingFormProps) => {
         <BookingStep3
           setStep={setStep}
           trip={trip}
-          personalInformation={personalInformation}
-          additionalChoices={additionalChoices}
+          personalInformation={personalInformation!}
+          additionalChoices={additionalChoices!}
         />
       );
     }
   };
 
-  if (step === 4 || !step) {
+  if (step === 4) {
     return (
       <article className={styles.bookingFormWrapper}>
-        {step === 4 && <BookingStep4 email={personalInformation.email} imageUrl={trip.imageUrl} />}
-        {step === 0 && <BookingError setStep={setStep} />}
+        <BookingStep4 email={personalInformation!.email} imageUrl={trip.imageUrl} />
+      </article>
+    );
+  }
+
+  if (step === 0) {
+    return (
+      <article className={styles.bookingFormWrapper}>
+        <BookingError setStep={setStep} />
       </article>
     );
   }
