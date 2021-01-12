@@ -1,22 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import TripGalleryCard from '../components/TripGalleryCard/TripGalleryCard';
-import { TripEntry } from '../types';
-import { fetchTrips } from '../utils/fetchFunctions';
+import React from 'react';
+import TripGallery from '../components/TripGallery/TripGallery';
 
 import styles from './HomePage.module.scss';
 
 const HomePage = () => {
-  const [trips, setTrips] = useState<TripEntry[]>([]);
-
-  useEffect(() => {
-    const getTrips = async () => {
-      const allTrips = await fetchTrips(5);
-      setTrips([...allTrips]);
-    };
-
-    getTrips();
-  }, []);
-
   return (
     <>
       <article className={styles.heroWrapper}>
@@ -36,11 +23,7 @@ const HomePage = () => {
         </p>
       </article>
 
-      <article className={styles.tripCardWrapper}>
-        {trips.map(trip => (
-          <TripGalleryCard key={trip.title} title={trip.title} imageUrl={trip.imageUrl} />
-        ))}
-      </article>
+      <TripGallery />
     </>
   );
 };

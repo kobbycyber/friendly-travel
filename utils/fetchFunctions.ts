@@ -1,5 +1,5 @@
 import { createClient } from 'contentful';
-import { TripEntry } from '../types';
+import { TripEntry, ArticleEntry } from '../types';
 import { getFormattedPrice } from './helpFunctions';
 
 const client = createClient({
@@ -54,4 +54,29 @@ const formatReturnTripEntry = (entry: any) => {
     imageUrl: entry.image.fields.file.url,
   };
   return trip;
+};
+
+export const fetchArticle = async (slug: string) => {
+  const title = slug.split('-').join(' ');
+
+  const entries = await client.getEntries({
+    content_type: 'article',
+    'fields.title[match]': title,
+  });
+
+  if (entries.items.length === 1) {
+    return formatArticle(entries.items[0].fields);
+  } else {
+    return null;
+  }
+};
+
+const formatArticle = (entry: any) => {
+  const article: ArticleEntry = {
+    title: entry.title,
+    description: entry.description,
+    body: entry.body,
+    imageUrl: entry.image.fields.file.url,
+  };
+  return article;
 };

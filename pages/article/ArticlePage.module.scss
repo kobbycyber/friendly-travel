@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.articleWrapper {
+  @include center-column;
+}
+
+.description {
+  max-width: $max-text-width;
+  margin: $margin;
+  text-align: center;
+
+  h1 {
+    font-size: 2.25rem;
+    margin-top: 0;
+
+    @media screen and (min-width: $media-min-width) {
+      font-size: 3rem;
+    }
+  }
+}
+
+.heroImage {
+  width: 100vw;
+  height: 500px;
+  object-fit: cover;
+  margin-bottom: $margin/2;
+}
+
+.contentWrapper {
+  @include center-column;
+
+  @media screen and (min-width: $media-min-width) {
+    width: $max-text-width;
+  }
+
+  img {
+    width: $max-text-width;
+    max-width: 100vw;
+    margin: $margin/2 0;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: $margin/2 $margin;
+  }
+}

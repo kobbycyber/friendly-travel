@@ -7,6 +7,13 @@ export interface TripEntry {
   body: any; //rich text
 }
 
+export interface ArticleEntry {
+  title: string;
+  description: string;
+  body: any; //rich text
+  imageUrl: string;
+}
+
 export interface PersonalInformation {
   name: string;
   email: string;
