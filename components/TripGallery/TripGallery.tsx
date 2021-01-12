@@ -19,16 +19,19 @@ const TripGallery = () => {
 
   return (
     <article className={styles.mainWrapper}>
-      {trips.map(trip => (
-        <Link href={`/trips/${getSlug(trip.title)}/`} key={trip.title}>
-          <a className={styles.cardWrapper}>
-            <img src={trip.imageUrl} />
-            <div className={styles.titleWrapper}>
-              <p>{trip.title}</p>
-            </div>
-          </a>
-        </Link>
-      ))}
+      <h2>Find Your Next Destination</h2>
+      <div className={styles.galleryWrapper}>
+        {trips.map(trip => (
+          <Link href={`/trips/${getSlug(trip.title)}/`} key={trip.title}>
+            <a className={styles.cardWrapper}>
+              <img src={trip.imageUrl} />
+              <div className={styles.titleWrapper}>
+                <p>{trip.title}</p>
+              </div>
+            </a>
+          </Link>
+        ))}
+      </div>
     </article>
   );
 };
