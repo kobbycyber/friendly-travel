@@ -112,7 +112,7 @@ const BookingStep2 = ({ setStep, setAdditionalChoices, additionalChoices }: Book
       </div>
 
       <div className={buttonStyles.buttonWrapper}>
-        <button className={buttonStyles.secondaryButton} onClick={() => setStep(1)}>
+        <button type="button" className={buttonStyles.secondaryButton} onClick={() => setStep(1)}>
           Back
         </button>
 
