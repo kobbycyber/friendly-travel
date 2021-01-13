@@ -3,7 +3,9 @@ import Head from 'next/head';
 import '../styles/globals.scss';
 import styles from './App.module.scss';
 
-const MyApp = ({ Component, pageProps }) => {
+import type { AppProps } from 'next/app';
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>

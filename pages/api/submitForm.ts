@@ -4,8 +4,8 @@ import { SubmitFormInput } from '../../types';
 import { validEmail } from '../../utils/helpFunctions';
 
 const mailgun = new Mailgun({
-  apiKey: process.env.MAILGUN_API_KEY,
-  domain: process.env.MAILGUN_DOMAIN,
+  apiKey: process.env.MAILGUN_API_KEY!,
+  domain: process.env.MAILGUN_DOMAIN!,
 });
 
 const validFormInput = ({ trip, personalInformation, additionalChoices }: SubmitFormInput) => {
@@ -59,7 +59,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         const data = {
           from: `friendly-travel@${process.env.MAILGUN_DOMAIN}`,
-          to: process.env.MAILGUN_APPROVED_EMAIL,
+          to: process.env.MAILGUN_APPROVED_EMAIL!,
           subject: `Booking of ${req.body.trip.title} is requested`,
           html: template,
         };

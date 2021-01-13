@@ -7,15 +7,25 @@ import { TripEntry } from '../../types';
 
 const TripGallery = () => {
   const [trips, setTrips] = useState<TripEntry[]>([]);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     const getTrips = async () => {
       const allTrips = await fetchTrips(5);
-      setTrips([...allTrips]);
+
+      if (allTrips) {
+        setTrips([...allTrips]);
+      } else {
+        setNotFound(true);
+      }
     };
 
     getTrips();
   }, []);
+
+  if (notFound) {
+    return <></>;
+  }
 
   return (
     <article className={styles.mainWrapper}>

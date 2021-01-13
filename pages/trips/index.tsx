@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { fetchTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
+
 import TripCard from '../../components/TripCard/TripCard';
+import NotFound from '../../components/NotFound/NotFound';
+
 import styles from './TripsPage.module.scss';
 import { TripEntry } from '../../types';
 
 const TripsPage = () => {
   const [trips, setTrips] = useState<TripEntry[]>([]);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     const getTrips = async () => {
       const allTrips = await fetchTrips();
-      setTrips([...allTrips]);
+      if (allTrips) {
+        setTrips([...allTrips]);
+      } else {
+        setNotFound(true);
+      }
     };
 
     getTrips();
@@ -27,8 +35,14 @@ const TripsPage = () => {
         : '-sys.createdAt';
 
     const sortedTrips = await fetchSortedTrips(sortingValue);
-    setTrips([...sortedTrips]);
+    if (sortedTrips) {
+      setTrips([...sortedTrips]);
+    }
   };
+
+  if (notFound) {
+    return <NotFound />;
+  }
 
   return (
     <>

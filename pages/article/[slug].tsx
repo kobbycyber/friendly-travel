@@ -43,7 +43,7 @@ const ArticlePage = () => {
 
   const options = {
     renderNode: {
-      'embedded-asset-block': node => `<img src="${node.data.target.fields.file.url}"/>`,
+      'embedded-asset-block': (node: any) => `<img src="${node.data.target.fields.file.url}"/>`,
     },
   };
 
