@@ -197,12 +197,9 @@ const BookingStep1 = ({
           <a className={buttonStyles.secondaryButton}>Back</a>
         </Link>
 
-        <input
-          type="submit"
-          value="Next"
-          className={buttonStyles.primaryButton}
-          onClick={e => handleClick(e)}
-        />
+        <button type="button" className={buttonStyles.primaryButton} onClick={e => handleClick(e)}>
+          Next
+        </button>
       </div>
     </form>
   );

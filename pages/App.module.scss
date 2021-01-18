@@ -13,6 +13,26 @@
   padding: 0 2rem;
 }
 
+.tripsLink {
+  position: relative;
+
+  &::after {
+    content: '';
+    height: 4px;
+    width: 0;
+    left: 0;
+    right: 0;
+    background-color: $blue;
+    position: absolute;
+    bottom: -2px;
+    transition: width 0.4s;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
 .homeLink {
   @include center-row;
   justify-content: flex-start;

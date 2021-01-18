@@ -16,6 +16,7 @@
   grid-auto-flow: column;
   gap: 1rem;
   overflow: scroll;
+  padding: 1rem;
 }
 
 .cardWrapper {
@@ -27,7 +28,7 @@
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 40px 15px rgba($light-grey, 0.5);
+    box-shadow: 0 0 16px 4px rgba($light-grey, 0.7);
   }
 
   img {

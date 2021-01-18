@@ -26,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             </a>
           </Link>
           <Link href="/trips/">
-            <a>Trips</a>
+            <a className={styles.tripsLink}>Trips</a>
           </Link>
         </nav>
       </header>

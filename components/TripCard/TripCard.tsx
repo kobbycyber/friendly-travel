@@ -16,7 +16,7 @@ const TripCard = ({ title, startDate, endDate, imageUrl, price }: TripCardProps)
 
   return (
     <Link href={`/trips/${slug}/`}>
-      <div className={styles.tripCard}>
+      <a className={styles.tripCard}>
         <img src={imageUrl} />
         <div className={styles.textWrapper}>
           <div>
@@ -25,7 +25,7 @@ const TripCard = ({ title, startDate, endDate, imageUrl, price }: TripCardProps)
           </div>
           <p className={styles.price}>{price}kr</p>
         </div>
-      </div>
+      </a>
     </Link>
   );
 };

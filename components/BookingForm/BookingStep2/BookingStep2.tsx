@@ -116,12 +116,9 @@ const BookingStep2 = ({ setStep, setAdditionalChoices, additionalChoices }: Book
           Back
         </button>
 
-        <input
-          type="submit"
-          value="Next"
-          className={buttonStyles.primaryButton}
-          onClick={e => handleClick(e)}
-        />
+        <button type="button" className={buttonStyles.primaryButton} onClick={e => handleClick(e)}>
+          Next
+        </button>
       </div>
     </form>
   );
