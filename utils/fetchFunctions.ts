@@ -1,6 +1,6 @@
 import { createClient } from 'contentful';
-import { TripEntry, ArticleEntry } from '../types';
 import { getFormattedPrice, getRandomTrips } from './helpFunctions';
+import { TripEntry, ArticleEntry, ReviewEntry } from '../types';
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
@@ -88,4 +88,25 @@ const formatArticle = (entry: any) => {
     imageUrl: entry.image.fields.file.url,
   };
   return article;
+};
+
+export const fetchReviews = async (limit = 5) => {
+  const entries = await client.getEntries({
+    content_type: 'review',
+    limit,
+  });
+
+  if (entries.items) {
+    return entries.items.map(item => formatReview(item.fields));
+  }
+};
+
+const formatReview = (entry: any) => {
+  const review: ReviewEntry = {
+    userName: entry.userName,
+    userAge: entry.userAge,
+    quote: entry.quote,
+    imageUrl: entry.image.fields.file.url,
+  };
+  return review;
 };

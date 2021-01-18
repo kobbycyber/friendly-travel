@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import TripGallery from '../components/TripGallery/TripGallery';
+import ReviewGallery from '../components/ReviewGallery/ReviewGallery';
 
 import styles from './HomePage.module.scss';
 import buttonStyles from '../styles/buttons.module.scss';
@@ -30,6 +31,8 @@ const HomePage = () => {
       </article>
 
       <TripGallery />
+
+      <ReviewGallery />
     </>
   );
 };

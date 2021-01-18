@@ -14,6 +14,13 @@ export interface ArticleEntry {
   imageUrl: string;
 }
 
+export interface ReviewEntry {
+  userName: string;
+  userAge: string;
+  quote: string;
+  imageUrl: string;
+}
+
 export interface PersonalInformation {
   name: string;
   email: string;
