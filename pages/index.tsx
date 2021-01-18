@@ -1,7 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 import TripGallery from '../components/TripGallery/TripGallery';
 
 import styles from './HomePage.module.scss';
+import buttonStyles from '../styles/buttons.module.scss';
 
 const HomePage = () => {
   return (
@@ -21,6 +23,10 @@ const HomePage = () => {
           traveling alone is always thrilling, it has its downsides as well. Enter Friendly Travel,
           where you can join a group of likeminded travelers for great experiences and new friends.
         </p>
+
+        <Link href="/trips/">
+          <a className={buttonStyles.primaryButton}>Let's go!</a>
+        </Link>
       </article>
 
       <TripGallery />
