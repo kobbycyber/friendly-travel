@@ -1,3 +1,5 @@
+import { TripEntry } from '../types';
+
 export const getReformattedDate = (start: string, end: string) => {
   const monthNames = [
     'January',
@@ -37,4 +39,21 @@ export const validEmail = (email: string) => {
 
 export const getFormattedPrice = (price: string) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+};
+
+export const getRandomTrips = (array: TripEntry[], number: number) => {
+  const result: TripEntry[] = new Array(number);
+  let len = array.length;
+  const taken = new Array(len);
+
+  if (number > len) {
+    throw 'getRandom: not enough elements in array to return';
+  }
+
+  while (number--) {
+    var x = Math.floor(Math.random() * len);
+    result[number] = array[x in taken ? taken[x] : x];
+    taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
 };

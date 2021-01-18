@@ -1,6 +1,6 @@
 import { createClient } from 'contentful';
 import { TripEntry, ArticleEntry } from '../types';
-import { getFormattedPrice } from './helpFunctions';
+import { getFormattedPrice, getRandomTrips } from './helpFunctions';
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
@@ -26,6 +26,15 @@ export const fetchSortedTrips = async (orderBy: string) => {
 
   if (entries.items) {
     return entries.items.map(item => formatReturnTripEntry(item.fields));
+  }
+};
+
+export const fetchRandomTrips = async (numberOfTrips: number) => {
+  const entries = await client.getEntries({ content_type: 'trip' });
+
+  if (entries.items) {
+    const formattedEntries = entries.items.map(item => formatReturnTripEntry(item.fields));
+    return getRandomTrips(formattedEntries, numberOfTrips);
   }
 };
 

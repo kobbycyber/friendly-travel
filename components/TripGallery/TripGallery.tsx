@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getSlug } from '../../utils/helpFunctions';
 import styles from './TripGallery.module.scss';
-import { fetchTrips } from '../../utils/fetchFunctions';
+import { fetchRandomTrips } from '../../utils/fetchFunctions';
 import { TripEntry } from '../../types';
 
 const TripGallery = () => {
@@ -11,7 +11,7 @@ const TripGallery = () => {
 
   useEffect(() => {
     const getTrips = async () => {
-      const allTrips = await fetchTrips(5);
+      const allTrips = await fetchRandomTrips(5);
 
       if (allTrips) {
         setTrips([...allTrips]);
