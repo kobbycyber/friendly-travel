@@ -26,6 +26,8 @@
   border-radius: 0.4rem;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 0 16px 4px rgba($light-grey, 0);
+  transition: box-shadow 0.2s;
 
   &:hover {
     box-shadow: 0 0 16px 4px rgba($light-grey, 0.7);

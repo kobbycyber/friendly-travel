@@ -14,6 +14,7 @@
     border: 1px solid $light-grey;
     font-family: 'Montserrat';
     font-size: 1rem;
+    transition: border 0.2s;
 
     &.invalid {
       border: 1px solid $warning-red;
