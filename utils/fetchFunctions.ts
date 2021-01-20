@@ -1,5 +1,5 @@
 import { createClient } from 'contentful';
-import { getFormattedPrice, getRandomTrips } from './helpFunctions';
+import { getFormattedPrice, getRandom } from './helpFunctions';
 import { TripEntry, ArticleEntry, ReviewEntry } from '../types';
 
 const client = createClient({
@@ -34,7 +34,7 @@ export const fetchRandomTrips = async (numberOfTrips: number) => {
 
   if (entries.items) {
     const formattedEntries = entries.items.map(item => formatReturnTripEntry(item.fields));
-    return getRandomTrips(formattedEntries, numberOfTrips);
+    return getRandom(formattedEntries, numberOfTrips);
   }
 };
 
@@ -77,6 +77,15 @@ export const fetchArticle = async (slug: string) => {
     return formatArticle(entries.items[0].fields);
   } else {
     return null;
+  }
+};
+
+export const fetchRandomArticle = async (numberOfArticles: number) => {
+  const entries = await client.getEntries({ content_type: 'article' });
+
+  if (entries.items) {
+    const formattedEntries = entries.items.map(item => formatArticle(item.fields));
+    return getRandom(formattedEntries, numberOfArticles);
   }
 };
 

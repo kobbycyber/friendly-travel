@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { fetchRandomArticle } from '../utils/fetchFunctions';
+import { getSlug } from '../utils/helpFunctions';
+
 import TripGallery from '../components/TripGallery/TripGallery';
 import ReviewGallery from '../components/ReviewGallery/ReviewGallery';
 
 import styles from './HomePage.module.scss';
 import buttonStyles from '../styles/buttons.module.scss';
 
+import { ArticleEntry } from '../types';
+
 const HomePage = () => {
+  const [articleEntry, setArticleEntry] = useState<ArticleEntry>();
+
+  useEffect(() => {
+    const getArticle = async () => {
+      const articles = await fetchRandomArticle(1);
+
+      if (articles) {
+        setArticleEntry(articles[0]);
+      }
+    };
+
+    getArticle();
+  }, []);
+
   return (
     <>
       <article className={styles.heroWrapper}>
@@ -31,6 +50,19 @@ const HomePage = () => {
       </article>
 
       <TripGallery />
+
+      {articleEntry && (
+        <article className={styles.articleWrapper}>
+          <img src={articleEntry.imageUrl} />
+          <div className={styles.textWrapper}>
+            <h2>{articleEntry.title}</h2>
+            <p>{articleEntry.description}</p>
+            <Link href={`/article/${getSlug(articleEntry.title)}`}>
+              <a className={buttonStyles.primaryButton}>Read more</a>
+            </Link>
+          </div>
+        </article>
+      )}
 
       <ReviewGallery />
     </>
