@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 import { fetchArticle } from '../../utils/fetchFunctions';
 
 import NotFound from '../../components/NotFound/NotFound';
@@ -41,9 +42,10 @@ const ArticlePage = () => {
     return <LoadingSpinner />;
   }
 
-  const options = {
+  const options: Options = {
     renderNode: {
-      'embedded-asset-block': (node: any) => `<img src="${node.data.target.fields.file.url}"/>`,
+      [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+      [BLOCKS.EMBEDDED_ASSET]: node => <img src={node.data.target.fields.file.url} />,
     },
   };
 
@@ -56,10 +58,9 @@ const ArticlePage = () => {
         </div>
         <img className={styles.heroImage} src={article.imageUrl} />
 
-        <div
-          className={styles.contentWrapper}
-          dangerouslySetInnerHTML={{ __html: documentToHtmlString(article.body, options) }}
-        />
+        <div className={styles.contentWrapper}>
+          {documentToReactComponents(article.body, options)}
+        </div>
       </section>
 
       <TripGallery />

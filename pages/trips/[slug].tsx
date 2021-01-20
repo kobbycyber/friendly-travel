@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 import { fetchTripBySlug } from '../../utils/fetchFunctions';
 import { getReformattedDate } from '../../utils/helpFunctions';
 
@@ -42,6 +43,12 @@ const TripPage = () => {
     return <LoadingSpinner />;
   }
 
+  const options: Options = {
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+    },
+  };
+
   return (
     <article className={styles.tripWrapper}>
       <h1>{trip.title}</h1>
@@ -49,10 +56,9 @@ const TripPage = () => {
 
       <img src={trip.imageUrl} />
 
-      <div
-        className={styles.textBody}
-        dangerouslySetInnerHTML={{ __html: documentToHtmlString(trip.body) }}
-      />
+      <div className={styles.textBody}>
+        {documentToReactComponents(trip.body, options)}
+      </div>
 
       <p className={styles.price}>Price: {trip.price}kr (excl. flight)</p>
 
