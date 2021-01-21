@@ -1,4 +1,4 @@
-import { ArticleEntry, TripEntry } from '../types';
+import { ArticleEntry, ReviewEntry, TripEntry } from '../types';
 
 export const getReformattedDate = (start: string, end: string) => {
   const monthNames = [
@@ -41,7 +41,7 @@ export const getFormattedPrice = (price: string) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 };
 
-export const getRandom = (array: TripEntry[] | ArticleEntry[], number: number) => {
+export const getRandom = (array: TripEntry[] | ArticleEntry[] | ReviewEntry[], number: number) => {
   const result = new Array(number);
   let len = array.length;
   const taken = new Array(len);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchReviews } from '../../utils/fetchFunctions';
+import { fetchRandomReviews } from '../../utils/fetchFunctions';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 import styles from './ReviewGallery.module.scss';
@@ -11,7 +11,7 @@ const ReviewGallery = () => {
 
   useEffect(() => {
     const getReviews = async () => {
-      const fetchedReviews = await fetchReviews(3);
+      const fetchedReviews = await fetchRandomReviews(3);
 
       if (fetchedReviews) {
         setReviews([...fetchedReviews]);

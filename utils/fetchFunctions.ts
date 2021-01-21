@@ -99,14 +99,12 @@ const formatArticle = (entry: any) => {
   return article;
 };
 
-export const fetchReviews = async (limit = 5) => {
-  const entries = await client.getEntries({
-    content_type: 'review',
-    limit,
-  });
+export const fetchRandomReviews = async (limit = 5) => {
+  const entries = await client.getEntries({ content_type: 'review' });
 
   if (entries.items) {
-    return entries.items.map(item => formatReview(item.fields));
+    const formattedEntries = entries.items.map(item => formatReview(item.fields));
+    return getRandom(formattedEntries, limit);
   }
 };
 
