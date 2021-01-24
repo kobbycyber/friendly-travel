@@ -15,18 +15,7 @@
 
 .tripsLink {
   position: relative;
-
-  &::after {
-    content: '';
-    height: 4px;
-    width: 0;
-    left: 0;
-    right: 0;
-    background-color: $blue;
-    position: absolute;
-    bottom: -2px;
-    transition: width 0.4s;
-  }
+  @include animated-underline;
 
   &:hover::after {
     width: 100%;

@@ -1,6 +1,6 @@
 import { createClient } from 'contentful';
 import { getFormattedPrice, getRandom } from './helpFunctions';
-import { TripEntry, ArticleEntry, ReviewEntry } from '../types';
+import { TripEntry, ArticleEntry, ReviewEntry, TripsWithInterstitchedArticles } from '../types';
 
 const client = createClient({
   space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID!,
@@ -116,4 +116,35 @@ const formatReview = (entry: any) => {
     imageUrl: entry.image.fields.file.url,
   };
   return review;
+};
+
+export const fetchTripsWithInterstitchedArticles = async (sortingValue?: string) => {
+  let trips: TripEntry[] = [];
+
+  if (sortingValue) {
+    trips = (await fetchSortedTrips(sortingValue)) || [];
+  } else {
+    trips = (await fetchTrips()) || [];
+  }
+
+  let articles: ArticleEntry[] = (await fetchRandomArticle(Math.floor(trips.length / 4))) || [];
+  let result: TripsWithInterstitchedArticles = [];
+
+  if (articles.length) {
+    const length = trips.length;
+
+    for (let i = 0; i <= length; i++) {
+      if (i % 5 === 4) {
+        result.push({ type: 'article', data: articles[0] });
+        articles = articles.filter((a, i) => i !== 0);
+      } else {
+        result.push({ type: 'trip', data: trips[0] });
+        trips = trips.filter((t, i) => i !== 0);
+      }
+    }
+  } else {
+    result = trips.map(trip => ({ type: 'trip', data: trip }));
+  }
+
+  return result;
 };

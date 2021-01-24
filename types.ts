@@ -21,6 +21,18 @@ export interface ReviewEntry {
   imageUrl: string;
 }
 
+export type TripsWithInterstitchedArticles = (InterstitchedTrip | InterstitchedArticle)[];
+
+interface InterstitchedTrip {
+  type: 'trip';
+  data: TripEntry;
+}
+
+interface InterstitchedArticle {
+  type: 'article';
+  data: ArticleEntry;
+}
+
 export interface PersonalInformation {
   name: string;
   email: string;

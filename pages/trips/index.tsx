@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { fetchTrips, fetchSortedTrips } from '../../utils/fetchFunctions';
+import { fetchTripsWithInterstitchedArticles } from '../../utils/fetchFunctions';
 
 import TripCard from '../../components/TripCard/TripCard';
 import NotFound from '../../components/NotFound/NotFound';
 
 import styles from './TripsPage.module.scss';
-import { TripEntry } from '../../types';
+import { TripsWithInterstitchedArticles } from '../../types';
+import ArticleCard from '../../components/ArticleCard/ArticleCard';
 
 const TripsPage = () => {
-  const [trips, setTrips] = useState<TripEntry[]>([]);
+  const [entries, setEntries] = useState<TripsWithInterstitchedArticles>([]);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    const getTrips = async () => {
-      const allTrips = await fetchTrips();
-      if (allTrips) {
-        setTrips([...allTrips]);
+    const getEntries = async () => {
+      const newEntries = await fetchTripsWithInterstitchedArticles();
+      if (newEntries.length) {
+        setEntries(newEntries);
       } else {
         setNotFound(true);
       }
     };
 
-    getTrips();
+    getEntries();
   }, []);
 
   const handleSort = async (value: string) => {
@@ -33,10 +34,9 @@ const TripsPage = () => {
         : value === 'highestPrice'
         ? '-fields.price'
         : '-sys.createdAt';
-
-    const sortedTrips = await fetchSortedTrips(sortingValue);
+    const sortedTrips = await fetchTripsWithInterstitchedArticles(sortingValue);
     if (sortedTrips) {
-      setTrips([...sortedTrips]);
+      setEntries([...sortedTrips]);
     }
   };
 
@@ -57,17 +57,14 @@ const TripsPage = () => {
       </article>
 
       <div className={styles.tripCardWrapper}>
-        {trips.length
-          ? trips.map(trip => (
-              <TripCard
-                key={trip.title}
-                title={trip.title}
-                startDate={trip.startDate}
-                endDate={trip.endDate}
-                imageUrl={trip.imageUrl}
-                price={trip.price}
-              />
-            ))
+        {entries.length
+          ? entries.map(entry =>
+              entry.type === 'trip' ? (
+                <TripCard key={entry.data.title} trip={entry.data} />
+              ) : (
+                <ArticleCard key={entry.data.title} article={entry.data} />
+              )
+            )
           : null}
       </div>
     </>
