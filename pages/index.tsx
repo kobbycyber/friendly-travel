@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { fetchRandomArticle } from '../utils/fetchFunctions';
 import { getSlug } from '../utils/helpFunctions';
 
 import TripGallery from '../components/TripGallery/TripGallery';
@@ -16,7 +15,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const getArticle = async () => {
-      const articles = await fetchRandomArticle(1);
+      const articles = await (await fetch('/api/articles/?limit=1')).json();
 
       if (articles) {
         setArticleEntry(articles[0]);

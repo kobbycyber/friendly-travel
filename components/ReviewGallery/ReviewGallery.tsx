@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { fetchRandomReviews } from '../../utils/fetchFunctions';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 import styles from './ReviewGallery.module.scss';
@@ -11,10 +10,10 @@ const ReviewGallery = () => {
 
   useEffect(() => {
     const getReviews = async () => {
-      const fetchedReviews = await fetchRandomReviews(3);
+      const result = await (await fetch('/api/reviews/?limit=3')).json();
 
-      if (fetchedReviews) {
-        setReviews([...fetchedReviews]);
+      if (result) {
+        setReviews([...result]);
       } else {
         setNotFound(true);
       }

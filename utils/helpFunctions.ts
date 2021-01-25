@@ -1,5 +1,3 @@
-import { ArticleEntry, ReviewEntry, TripEntry } from '../types';
-
 export const getReformattedDate = (start: string, end: string) => {
   const monthNames = [
     'January',
@@ -35,25 +33,4 @@ export const getSlug = (title: string) => {
 export const validEmail = (email: string) => {
   const validEmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return validEmailRegex.test(String(email).toLowerCase());
-};
-
-export const getFormattedPrice = (price: string) => {
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-};
-
-export const getRandom = (array: TripEntry[] | ArticleEntry[] | ReviewEntry[], number: number) => {
-  const result = new Array(number);
-  let len = array.length;
-  const taken = new Array(len);
-
-  if (number > len) {
-    throw 'getRandom: not enough elements in array to return';
-  }
-
-  while (number--) {
-    var x = Math.floor(Math.random() * len);
-    result[number] = array[x in taken ? taken[x] : x];
-    taken[x] = --len in taken ? taken[len] : len;
-  }
-  return result;
 };

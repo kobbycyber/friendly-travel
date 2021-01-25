@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { fetchArticle } from '../../utils/fetchFunctions';
 
 import NotFound from '../../components/NotFound/NotFound';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -21,7 +20,7 @@ const ArticlePage = () => {
   useEffect(() => {
     const getArticle = async () => {
       if (typeof slug === 'string') {
-        const article = await fetchArticle(slug);
+        const article = await (await fetch(`/api/articles/${slug}/`)).json();
 
         if (article) {
           setArticle(article);

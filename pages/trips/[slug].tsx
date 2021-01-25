@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
-import { fetchTripBySlug } from '../../utils/fetchFunctions';
 import { getReformattedDate } from '../../utils/helpFunctions';
 
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
@@ -23,9 +22,10 @@ const TripPage = () => {
   useEffect(() => {
     const getTrips = async () => {
       if (typeof slug === 'string') {
-        const trip = await fetchTripBySlug(slug);
-        if (trip) {
-          setTrip(trip);
+        const result = await (await fetch(`/api/trips/${slug}/`)).json();
+
+        if (result) {
+          setTrip(result);
         } else {
           setNotFound(true);
         }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { fetchTripBySlug } from '../../utils/fetchFunctions';
 import { getReformattedDate } from '../../utils/helpFunctions';
 
 import BookingForm from '../../components/BookingForm/BookingForm';
@@ -20,9 +19,10 @@ const BookingPage = () => {
   useEffect(() => {
     const getTrips = async () => {
       if (typeof slug === 'string') {
-        const trip = await fetchTripBySlug(slug);
-        if (trip) {
-          setTrip(trip);
+        const result = await (await fetch(`/api/trips/${slug}/`)).json();
+
+        if (result) {
+          setTrip(result);
         } else {
           setNotFound(true);
         }

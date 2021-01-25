@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { fetchTripsWithInterstitchedArticles } from '../../utils/fetchFunctions';
 
 import TripCard from '../../components/TripCard/TripCard';
 import NotFound from '../../components/NotFound/NotFound';
@@ -14,7 +13,7 @@ const TripsPage = () => {
 
   useEffect(() => {
     const getEntries = async () => {
-      const newEntries = await fetchTripsWithInterstitchedArticles();
+      const newEntries = await (await fetch('/api/trips-with-articles/')).json();
       if (newEntries.length) {
         setEntries(newEntries);
       } else {
@@ -34,7 +33,11 @@ const TripsPage = () => {
         : value === 'highestPrice'
         ? '-fields.price'
         : '-sys.createdAt';
-    const sortedTrips = await fetchTripsWithInterstitchedArticles(sortingValue);
+
+    const sortedTrips = await (
+      await fetch(`/api/trips-with-articles/?order=${sortingValue}`)
+    ).json();
+
     if (sortedTrips) {
       setEntries([...sortedTrips]);
     }
