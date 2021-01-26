@@ -1,28 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { server } from '../../config/index';
 
 import TripCard from '../../components/TripCard/TripCard';
+import ArticleCard from '../../components/ArticleCard/ArticleCard';
 import NotFound from '../../components/NotFound/NotFound';
 
 import styles from './TripsPage.module.scss';
 import { TripsWithInterstitchedArticles } from '../../types';
-import ArticleCard from '../../components/ArticleCard/ArticleCard';
 
-const TripsPage = () => {
-  const [entries, setEntries] = useState<TripsWithInterstitchedArticles>([]);
-  const [notFound, setNotFound] = useState(false);
+interface TripsPageProps {
+  initialEntries: TripsWithInterstitchedArticles;
+}
 
-  useEffect(() => {
-    const getEntries = async () => {
-      const newEntries = await (await fetch('/api/trips-with-articles/')).json();
-      if (newEntries.length) {
-        setEntries(newEntries);
-      } else {
-        setNotFound(true);
-      }
-    };
-
-    getEntries();
-  }, []);
+const TripsPage = ({ initialEntries }: TripsPageProps) => {
+  const [entries, setEntries] = useState<TripsWithInterstitchedArticles>(initialEntries);
 
   const handleSort = async (value: string) => {
     const sortingValue =
@@ -43,7 +34,7 @@ const TripsPage = () => {
     }
   };
 
-  if (notFound) {
+  if (!entries.length) {
     return <NotFound />;
   }
 
@@ -75,3 +66,10 @@ const TripsPage = () => {
 };
 
 export default TripsPage;
+
+export async function getServerSideProps() {
+  const res = await fetch(`${server}/api/trips-with-articles/`);
+  const initialEntries = await res.json();
+  const props: TripsPageProps = { initialEntries };
+  return { props };
+}

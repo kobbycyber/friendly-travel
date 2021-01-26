@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import Link from 'next/link';
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { server } from '../../config/index';
 import { getReformattedDate } from '../../utils/helpFunctions';
 
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import NotFound from '../../components/NotFound/NotFound';
 
 import styles from './TripPage.module.scss';
@@ -13,34 +12,14 @@ import buttonStyles from '../../styles/buttons.module.scss';
 
 import { TripEntry } from '../../types';
 
-const TripPage = () => {
-  const [trip, setTrip] = useState<TripEntry | null>(null);
-  const [notFound, setNotFound] = useState(false);
+interface TripPageProps {
+  trip: TripEntry;
+  slug: string;
+}
 
-  const { slug } = useRouter().query;
-
-  useEffect(() => {
-    const getTrips = async () => {
-      if (typeof slug === 'string') {
-        const result = await (await fetch(`/api/trips/${slug}/`)).json();
-
-        if (result) {
-          setTrip(result);
-        } else {
-          setNotFound(true);
-        }
-      }
-    };
-
-    getTrips();
-  }, [slug]);
-
-  if (notFound) {
+const TripPage = ({ trip, slug }: TripPageProps) => {
+  if (!trip.title) {
     return <NotFound />;
-  }
-
-  if (!trip) {
-    return <LoadingSpinner />;
   }
 
   const options: Options = {
@@ -56,9 +35,7 @@ const TripPage = () => {
 
       <img src={trip.imageUrl} />
 
-      <div className={styles.textBody}>
-        {documentToReactComponents(trip.body, options)}
-      </div>
+      <div className={styles.textBody}>{documentToReactComponents(trip.body, options)}</div>
 
       <p className={styles.price}>Price: {trip.price}kr (excl. flight)</p>
 
@@ -73,5 +50,13 @@ const TripPage = () => {
     </article>
   );
 };
+
+export async function getServerSideProps(context: any) {
+  const slug = context.query.slug;
+  const res = await fetch(`${server}/api/trips/${slug}/`);
+  const trip = await res.json();
+  const props: TripPageProps = { trip, slug };
+  return { props };
+}
 
 export default TripPage;

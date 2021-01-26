@@ -1,44 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { server } from '../../config/index';
 
 import NotFound from '../../components/NotFound/NotFound';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import TripGallery from '../../components/TripGallery/TripGallery';
 
 import styles from './ArticlePage.module.scss';
 
 import { ArticleEntry } from '../../types';
 
-const ArticlePage = () => {
-  const [article, setArticle] = useState<ArticleEntry>();
-  const [notFound, setNotFound] = useState(false);
+interface ArticlePageProps {
+  article: ArticleEntry;
+}
 
-  const { slug } = useRouter().query;
-
-  useEffect(() => {
-    const getArticle = async () => {
-      if (typeof slug === 'string') {
-        const article = await (await fetch(`/api/articles/${slug}/`)).json();
-
-        if (article) {
-          setArticle(article);
-        } else {
-          setNotFound(true);
-        }
-      }
-    };
-
-    getArticle();
-  }, [slug]);
-
-  if (notFound) {
+const ArticlePage = ({ article }: ArticlePageProps) => {
+  if (!article.title) {
     return <NotFound />;
-  }
-
-  if (!article) {
-    return <LoadingSpinner />;
   }
 
   const options: Options = {
@@ -66,5 +44,13 @@ const ArticlePage = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context: any) {
+  const slug = context.query.slug;
+  const res = await fetch(`${server}/api/articles/${slug}/`);
+  const article = await res.json();
+  const props: ArticlePageProps = { article };
+  return { props };
+}
 
 export default ArticlePage;

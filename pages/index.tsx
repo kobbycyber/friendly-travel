@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { server } from '../config';
 import { getSlug } from '../utils/helpFunctions';
 
 import TripGallery from '../components/TripGallery/TripGallery';
@@ -10,21 +11,11 @@ import buttonStyles from '../styles/buttons.module.scss';
 
 import { ArticleEntry } from '../types';
 
-const HomePage = () => {
-  const [articleEntry, setArticleEntry] = useState<ArticleEntry>();
+interface HomePageProps {
+  articleEntry: ArticleEntry;
+}
 
-  useEffect(() => {
-    const getArticle = async () => {
-      const articles = await (await fetch('/api/articles/?limit=1')).json();
-
-      if (articles) {
-        setArticleEntry(articles[0]);
-      }
-    };
-
-    getArticle();
-  }, []);
-
+const HomePage = ({ articleEntry }: HomePageProps) => {
   return (
     <>
       <article className={styles.heroWrapper}>
@@ -67,5 +58,12 @@ const HomePage = () => {
     </>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await fetch(`${server}/api/articles/?limit=1`);
+  const data = await res.json();
+  const props: HomePageProps = { articleEntry: data[0] };
+  return { props };
+}
 
 export default HomePage;
