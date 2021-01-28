@@ -21,17 +21,33 @@
     margin-bottom: $margin;
   }
 
-  img {
+  .heroImage {
     object-fit: cover;
     width: 100vw;
     max-height: 500px;
   }
 
-  .textBody {
+  .contentWrapper {
+    @include center-column;
     max-width: $max-text-width;
 
     @media screen and (min-width: $media-min-width) {
       margin: 3rem 0;
+    }
+
+    img {
+      width: $max-text-width;
+      max-width: 100vw;
+      margin: $margin/2 0;
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      margin: $margin/2 $margin;
     }
   }
 

@@ -25,6 +25,7 @@ const TripPage = ({ trip, slug }: TripPageProps) => {
   const options: Options = {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => <p>{children}</p>,
+      [BLOCKS.EMBEDDED_ASSET]: node => <img src={node.data.target.fields.file.url} />,
     },
   };
 
@@ -33,9 +34,11 @@ const TripPage = ({ trip, slug }: TripPageProps) => {
       <h1>{trip.title}</h1>
       <h3>{getReformattedDate(trip.startDate, trip.endDate)}</h3>
 
-      <img src={trip.imageUrl} />
+      <img className={styles.heroImage} src={trip.imageUrl} />
 
-      <div className={styles.textBody}>{documentToReactComponents(trip.body, options)}</div>
+      <div className={styles.contentWrapper}>
+        {documentToReactComponents(trip.body, options)}
+      </div>
 
       <p className={styles.price}>Price: {trip.price}kr (excl. flight)</p>
 
