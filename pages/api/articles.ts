@@ -10,11 +10,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (entries.items) {
       const formattedEntries = entries.items.map(item => formatArticle(item.fields));
-      const trips = getRandom(formattedEntries, limit);
-      return res.status(200).json(trips);
+      const articles = getRandom(formattedEntries, limit);
+      return res.status(200).json(articles);
     }
   } catch (error) {
-    console.error(error);
     return res.status(500).json(error);
   }
 
